@@ -10,7 +10,7 @@ import sys
 sys.path.append("game/")
 import plane as game
 
-TRAINING = True
+TRAINING = False
 
 # [1,0,0]do nothing,[0,1,0]left,[0,0,1]right
 def preprocess(observation, reshape):
@@ -26,6 +26,7 @@ def main():
     begin_time = datetime.datetime.now()
 
     env = game.GameState()
+    #env.display = ~TRAINING
     brain = rl_brain_pytorch.DeepQNetwork()
 
     step = 0

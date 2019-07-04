@@ -117,7 +117,7 @@ class GameState:
         self.enemy_frequency = 0
         # 初始化分数
         self.score = 0
-        self.display = False
+        self.display = True
 
     def frame_step(self, input_actions):
         
