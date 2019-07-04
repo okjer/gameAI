@@ -22,7 +22,7 @@ GAMMA = 0.99
 INITIAL_EPSILON = 0.07 # 0.1-》0.07 flappy bird -> plane
 TARGET_REPLACE_ITER = 200 # should be changed 
 LR = 1e-6
-CUDA = True
+CUDA = False
 
 class Net(nn.Module):
     def __init__(self, ):
@@ -74,11 +74,12 @@ class DeepQNetwork(nn.Module):
         self.current_state = None
 
         self.eval_net, self.target_net = Net(), Net() #旧网络，目标网络
-        
-        if (os.path.exists('pytorch_saved_networks/eval_net_params.pkl') and
-            os.path.exists('pytorch_saved_networks/target_net_params.pkl')):
-            self.eval_net.load_state_dict(torch.load('pytorch_saved_networks/eval_net_params.pkl'))
-            self.target_net.load_state_dict(torch.load('pytorch_saved_networks/target_net_params.pkl'))
+        ld = os.listdir('pytorch_saved_networks')
+        if len(ld) != 0:
+            i = [int((i.split('.')[0]).split('-')[-1]) for i in ld]
+            index = np.max(np.array(i))
+            self.eval_net.load_state_dict(torch.load('pytorch_saved_networks/eval_net_params-{}.pkl'.format(index)))
+            self.target_net.load_state_dict(torch.load('pytorch_saved_networks/target_net_params-{}.pkl'.format(index)))
             print("Successfully loaded:")
         else :print("Could not find old network weights")
         
@@ -169,6 +170,6 @@ class DeepQNetwork(nn.Module):
             self.saveNet()
         
     def saveNet(self):
-        torch.save(self.eval_net.state_dict(), 'pytorch_saved_networks/eval_net_params.pkl')
-        torch.save(self.target_net.state_dict(), 'pytorch_saved_networks/target_net_params.pkl')
+        torch.save(self.eval_net.state_dict(), 'pytorch_saved_networks/eval_net_params-{}.pkl'.format(self.time_step))
+        torch.save(self.target_net.state_dict(), 'pytorch_saved_networks/target_net_params-{}.pkl'.format(self.time_step))
         print("Net saved")

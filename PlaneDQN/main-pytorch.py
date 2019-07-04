@@ -10,7 +10,7 @@ import sys
 sys.path.append("game/")
 import plane as game
 
-TRAINING = False
+TRAINING = True
 
 # [1,0,0]do nothing,[0,1,0]left,[0,0,1]right
 def preprocess(observation, reshape):

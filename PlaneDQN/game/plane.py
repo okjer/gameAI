@@ -216,7 +216,7 @@ class GameState:
         self.screen.blit(score_text, text_rect)
 
         image_data = pygame.surfarray.array3d(pygame.display.get_surface())
-        pygame.display.update()
+        if self.display :pygame.display.update()
         clock = pygame.time.Clock()
         clock.tick(30)
         return image_data, reward, terminal

@@ -3,7 +3,7 @@ import numpy as np
 import sys
 import random
 import pygame
-from game import flappy_bird_utils
+import flappy_bird_utils
 import pygame.surfarray as surfarray
 from pygame.locals import *
 from itertools import cycle
@@ -57,6 +57,9 @@ class GameState:
         self.playerAccY    =   1   # players downward accleration
         self.playerFlapAcc =  -9   # players speed on flapping
         self.playerFlapped = False # True when player flaps
+        
+        self.display = False
+        
 
     def frame_step(self, input_actions):
         pygame.event.pump()
@@ -127,16 +130,18 @@ class GameState:
             reward = -1
 
         # draw sprites
-        SCREEN.blit(IMAGES['background'], (0,0))
+        if self.display: SCREEN.blit(IMAGES['background'], (0,0))
 
         for uPipe, lPipe in zip(self.upperPipes, self.lowerPipes):
-            SCREEN.blit(IMAGES['pipe'][0], (uPipe['x'], uPipe['y']))
-            SCREEN.blit(IMAGES['pipe'][1], (lPipe['x'], lPipe['y']))
+            if self.display: 
+                SCREEN.blit(IMAGES['pipe'][0], (uPipe['x'], uPipe['y']))
+                SCREEN.blit(IMAGES['pipe'][1], (lPipe['x'], lPipe['y']))
 
-        SCREEN.blit(IMAGES['base'], (self.basex, BASEY))
-        # print score so player overlaps the score
-        # showScore(self.score)
-        SCREEN.blit(IMAGES['player'][self.playerIndex],
+        if self.display: 
+            SCREEN.blit(IMAGES['base'], (self.basex, BASEY))
+            # print score so player overlaps the score
+            # showScore(self.score)
+            SCREEN.blit(IMAGES['player'][self.playerIndex],
                     (self.playerx, self.playery))
 
         image_data = pygame.surfarray.array3d(pygame.display.get_surface())
