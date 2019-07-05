@@ -2,6 +2,7 @@
 
 from __future__ import print_function
 import sys
+sys.path.append("game/")
 import game.wrapped_flappy_bird as game
 from rl_brain_tensorflow import DeepQNetwork
 import cv2
@@ -9,6 +10,7 @@ import numpy as np
 import datetime
 import tensorflow as tf
 
+TRAINING = True
 MAX_EPISODE = 100000
 N_ACTIONS = 2
 MEMORY_SIZE = 50000

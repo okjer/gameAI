@@ -58,7 +58,7 @@ class GameState:
         self.playerFlapAcc =  -9   # players speed on flapping
         self.playerFlapped = False # True when player flaps
         
-        self.display = False
+        self.display = True
         
 
     def frame_step(self, input_actions):

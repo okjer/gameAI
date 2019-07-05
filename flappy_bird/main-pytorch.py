@@ -10,7 +10,7 @@ import sys
 sys.path.append("game/")
 import wrapped_flappy_bird as game
 
-TRAINING = True
+TRAINING = False
 
 #[1,0] 不飞
 #[0,1] 飞
