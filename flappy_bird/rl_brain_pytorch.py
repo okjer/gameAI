@@ -20,7 +20,7 @@ MEMORY_SIZE = 50000
 MINIBATCH_SIZE = 32
 GAMMA = 0.99
 INITIAL_EPSILON = 0.1 # 0.07-》0.1  plane -> flappy bird
-TARGET_REPLACE_ITER = 200 # may should be changed 
+TARGET_REPLACE_ITER = 100 # may should be changed 
 LR = 1e-6
 CUDA = False
 
